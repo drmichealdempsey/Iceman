@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#020408"/>
+<title>ICEMAN ERA QUIZ — Drake × OVO × Crown Coins Casino</title>
+<meta property="og:title" content="Win FREE Drake ICEMAN Tickets + Meet & Greet"/>
+<meta property="og:description" content="3 questions. Find your era. Contact us to claim FREE Drake ICEMAN tickets + exclusive Meet & Greet."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+:root{
+  --void:#020408;
+  --deep:#040c18;
+  --ice:#7dd3f0;
+  --ice2:#b8e8fa;
+  --ovo:#c8a444;
+  --ovo2:#f0d278;
+  --crown:#f5c800;
+  --crown2:#ffe44d;
+  --neon:#00d4ff;
+  --glass:rgba(255,255,255,0.04);
+  --gb:rgba(255,255,255,0.08);
+  --white:#fff;
+  --muted:rgba(255,255,255,0.4);
+  /* safe area for iPhone notch */
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+  --sal:env(safe-area-inset-left,0px);
+  --sar:env(safe-area-inset-right,0px);
+}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Space Grotesk',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+
+/* ── BACKGROUNDS ── */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.bg-base{
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -5%,rgba(0,212,255,.07) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 90%,rgba(125,211,240,.04) 0%,transparent 50%),
+    var(--deep);
+}
+.bg-grid{
+  background-image:
+    linear-gradient(rgba(125,211,240,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,211,240,.025) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 40%,black 0%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 40%,black 0%,transparent 75%);
+}
+.bg-noise{
+  opacity:.25;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+.particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.pt{position:absolute;border-radius:50%;animation:pfloat linear infinite;}
+@keyframes pfloat{
+  0%{transform:translateY(105vh) translateX(0);opacity:0;}
+  8%{opacity:.8;}90%{opacity:.2;}
+  100%{transform:translateY(-5vh) translateX(var(--dx));opacity:0;}
+}
+
+/* ── SCREENS ── */
+.screen{
+  display:none;
+  position:relative;
+  z-index:10;
+  min-height:100vh;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  overflow-x:hidden;
+}
+.screen.active{display:flex;}
+
+/* ── COLLAB BAR ── */
+.cbar{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:calc(50px + var(--sat));
+  padding:0 16px;
+  padding-top:var(--sat);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(2,4,8,.88);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.cbar-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
+
+/* OVO pill */
+.ovo-pill{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 10px;border-radius:100px;
+  background:rgba(200,164,68,.1);
+  border:1px solid rgba(200,164,68,.3);
+  white-space:nowrap;flex-shrink:0;
+}
+.ovo-pill svg{width:18px;height:18px;flex-shrink:0;}
+.ovo-pill span{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:800;
+  letter-spacing:.06em;color:var(--ovo2);
+}
+
+/* Crown Coins Casino pill */
+.cc-pill{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 10px;border-radius:100px;
+  background:rgba(245,200,0,.08);
+  border:1px solid rgba(245,200,0,.28);
+  white-space:nowrap;flex-shrink:1;min-width:0;overflow:hidden;
+}
+.cc-pill svg{width:16px;height:16px;flex-shrink:0;}
+.cc-pill span{
+  font-family:'Syne',sans-serif;font-size:10px;font-weight:800;
+  letter-spacing:.05em;color:var(--crown2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.bar-sep{color:rgba(255,255,255,.18);font-size:11px;flex-shrink:0;}
+
+.cbar-right{
+  font-family:'Space Mono',monospace;font-size:8px;
+  letter-spacing:.14em;color:var(--muted);
+  white-space:nowrap;flex-shrink:0;margin-left:8px;
+}
+.ldot{display:inline-block;width:5px;height:5px;background:#ff4444;border-radius:50%;margin-right:5px;animation:lp 1.4s ease infinite;}
+@keyframes lp{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ═══════════════════════
+   LANDING
+═══════════════════════ */
+#s-land{
+  padding:calc(50px + var(--sat) + 20px) 0 calc(40px + var(--sab));
+  text-align:center;
+  gap:0;
+}
+.land-inner{
+  width:100%;
+  max-width:520px;
+  padding:0 16px;
+  margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;
+}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Space Mono',monospace;
+  font-size:clamp(8px,2.2vw,10px);
+  letter-spacing:.22em;color:var(--neon);text-transform:uppercase;
+  padding:7px 16px;border-radius:100px;
+  background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.18);
+  margin-bottom:20px;
+  animation:up .7s ease both;
+  max-width:100%;text-align:center;line-height:1.4;
+}
+
+/* ── THE KEY FIX: ICEMAN TITLE ──
+   Use SVG text so it ALWAYS fits 100% width, zero clipping */
+.hero-svg-wrap{
+  width:100%;
+  padding:0 8px;
+  margin-bottom:8px;
+  animation:up .7s .08s ease both;
+}
+.hero-svg{
+  width:100%;
+  height:auto;
+  display:block;
+  overflow:visible;
+  filter:drop-shadow(0 0 40px rgba(0,212,255,.2));
+}
+
+.hero-sub{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(11px,3vw,15px);
+  letter-spacing:clamp(.2em,.4vw,.35em);
+  text-transform:uppercase;color:var(--ovo);
+  margin-bottom:24px;
+  animation:up .7s .16s ease both;
+}
+
+/* collab badges row */
+.collab-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;width:100%;margin-bottom:24px;
+  animation:up .7s .2s ease both;
+}
+.cbadge{
+  display:flex;align-items:center;gap:5px;
+  padding:7px 10px;border-radius:10px;
+  border:1px solid var(--gb);
+  background:var(--glass);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  flex:1;min-width:0;max-width:140px;
+}
+.cbadge.ob{border-color:rgba(200,164,68,.22);}
+.cbadge.cb{border-color:rgba(245,200,0,.2);}
+.cbadge.db{border-color:rgba(0,212,255,.16);}
+.cbadge-ico{font-size:14px;flex-shrink:0;}
+.cbadge-txt{
+  font-family:'Syne',sans-serif;font-size:clamp(9px,2.5vw,11px);
+  font-weight:700;color:var(--white);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  line-height:1.1;
+}
+.crow{color:rgba(255,255,255,.15);font-size:10px;flex-shrink:0;}
+
+/* prize cards */
+.prize-wrap{
+  width:100%;margin-bottom:22px;
+  animation:up .7s .26s ease both;
+}
+.plabel{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(8px,2vw,9px);letter-spacing:.22em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.plabel::before,.plabel::after{content:'';flex:1;height:1px;background:var(--gb);}
+
+.pcards{display:flex;flex-direction:column;gap:8px;}
+.pcard{
+  display:flex;align-items:center;gap:12px;
+  background:var(--glass);border:1px solid var(--gb);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:12px 14px;border-radius:12px;
+  transition:all .22s ease;text-align:left;
+}
+.pcard:hover{background:rgba(255,255,255,.06);border-color:rgba(0,212,255,.18);transform:translateX(3px);}
+.pcard-ico{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;flex-shrink:0;
+}
+.pcard:nth-child(1) .pcard-ico{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.14);}
+.pcard:nth-child(2) .pcard-ico{background:rgba(245,200,0,.08);border:1px solid rgba(245,200,0,.14);}
+.pcard:nth-child(3) .pcard-ico{background:rgba(200,164,68,.08);border:1px solid rgba(200,164,68,.14);}
+.pcard-title{font-size:clamp(12px,3.2vw,14px);font-weight:600;color:var(--white);line-height:1.2;}
+.pcard-sub{font-size:clamp(10px,2.5vw,11px);color:var(--muted);margin-top:2px;line-height:1.3;}
+
+/* CTA button */
+.btn-start{
+  width:100%;max-width:360px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(135deg,var(--neon) 0%,var(--ice) 100%);
+  color:var(--void);
+  font-family:'Syne',sans-serif;
+  font-size:clamp(14px,3.5vw,16px);
+  font-weight:800;letter-spacing:.03em;
+  padding:16px 28px;border-radius:100px;border:none;cursor:pointer;
+  box-shadow:0 0 36px rgba(0,212,255,.22),0 4px 20px rgba(0,0,0,.4);
+  transition:all .22s ease;
+  position:relative;overflow:hidden;
+  animation:up .7s .34s ease both;
+  margin-bottom:20px;
+  min-height:54px;/* good thumb target */
+}
+.btn-start::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 55%);
+  border-radius:100px;
+}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 0 52px rgba(0,212,255,.35),0 12px 40px rgba(0,0,0,.5);}
+.btn-start:active{transform:scale(.97);}
+.arrow{transition:transform .2s;}
+.btn-start:hover .arrow{transform:translateX(4px);}
+
+.stats-row{
+  display:flex;align-items:center;gap:16px;
+  flex-wrap:wrap;justify-content:center;
+  animation:up .7s .4s ease both;
+}
+.stt{text-align:center;}
+.stt-n{font-family:'Syne',sans-serif;font-size:clamp(18px,4.5vw,22px);font-weight:800;color:var(--white);}
+.stt-l{font-family:'Space Mono',monospace;font-size:clamp(7px,1.8vw,9px);letter-spacing:.14em;color:var(--muted);}
+.stt-d{width:1px;height:24px;background:var(--gb);}
+
+/* ═══════════════════════
+   QUIZ
+═══════════════════════ */
+#s-quiz{
+  padding:calc(50px + var(--sat) + 16px) 16px calc(40px + var(--sab));
+  justify-content:flex-start;
+}
+.quiz-shell{width:100%;max-width:600px;margin:0 auto;padding-top:16px;}
+
+.prog-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:32px;
+}
+.prog-lbl{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,10px);letter-spacing:.18em;color:var(--muted);}
+.prog-dots{display:flex;gap:7px;}
+.pd{height:4px;border-radius:4px;transition:all .45s cubic-bezier(.4,0,.2,1);}
+.pd.idle{width:22px;background:rgba(255,255,255,.1);}
+.pd.active{width:38px;background:var(--neon);box-shadow:0 0 10px rgba(0,212,255,.55);}
+.pd.done{width:22px;background:linear-gradient(90deg,var(--ice),var(--ovo));}
+
+.q-anim{animation:qin .38s cubic-bezier(.22,1,.36,1) both;}
+@keyframes qin{from{opacity:0;transform:translateX(36px) scale(.98);}to{opacity:1;transform:translateX(0) scale(1);}}
+
+.qnum{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,9px);letter-spacing:.28em;color:var(--neon);margin-bottom:12px;}
+.qtext{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(22px,5.5vw,40px);
+  line-height:1.1;color:var(--white);
+  margin-bottom:24px;letter-spacing:-.02em;
+}
+
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{
+  display:flex;align-items:center;gap:14px;
+  background:var(--glass);border:1px solid var(--gb);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:15px 16px;border-radius:14px;
+  cursor:pointer;text-align:left;
+  transition:all .18s ease;
+  position:relative;overflow:hidden;
+  animation:oin .28s ease both;
+  min-height:58px;/* thumb friendly */
+}
+.opt:nth-child(1){animation-delay:.04s}
+.opt:nth-child(2){animation-delay:.09s}
+.opt:nth-child(3){animation-delay:.14s}
+.opt:nth-child(4){animation-delay:.19s}
+@keyframes oin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.opt::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.07),transparent 60%);opacity:0;transition:opacity .18s;border-radius:14px;}
+.opt:hover{border-color:rgba(0,212,255,.26);background:rgba(255,255,255,.06);transform:translateY(-1px);}
+.opt:hover::before{opacity:1;}
+.opt:active{transform:scale(.98);}
+.okey{
+  width:32px;height:32px;border-radius:9px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+  color:var(--muted);flex-shrink:0;transition:all .18s;
+}
+.opt:hover .okey{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.28);color:var(--neon);}
+.otxt{font-size:clamp(13px,3.2vw,15px);font-weight:500;color:rgba(255,255,255,.82);line-height:1.35;}
+
+/* ═══════════════════════
+   RESULT
+═══════════════════════ */
+#s-result{
+  padding:calc(50px + var(--sat) + 16px) 16px calc(40px + var(--sab));
+  justify-content:flex-start;text-align:center;
+}
+.res-shell{width:100%;max-width:520px;margin:0 auto;padding-top:14px;}
+
+.reye{font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,9px);letter-spacing:.3em;color:var(--neon);text-transform:uppercase;margin-bottom:10px;animation:up .5s ease both;}
+
+/* era name — also SVG to prevent ANY clipping */
+.era-svg-wrap{
+  width:100%;padding:0 4px;margin-bottom:6px;
+  animation:reveal .65s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes reveal{0%{opacity:0;transform:scale(.72) translateY(14px);filter:blur(16px);}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0);}}
+.era-svg{width:100%;height:auto;display:block;overflow:visible;}
+
+.rsub{font-family:'Syne',sans-serif;font-size:clamp(11px,2.5vw,15px);letter-spacing:.26em;text-transform:uppercase;color:var(--ovo);margin-top:4px;animation:up .5s .1s ease both;}
+.rdesc{
+  font-size:clamp(13px,3vw,15px);line-height:1.75;
+  color:rgba(255,255,255,.55);
+  max-width:400px;margin:14px auto 22px;
+  animation:up .5s .16s ease both;
+}
+.rdesc em{color:var(--ice2);font-style:normal;font-weight:600;}
+
+/* contact card */
+.ccard{
+  background:var(--glass);border:1px solid var(--gb);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-radius:20px;padding:24px 20px;
+  animation:up .5s .22s ease both;
+  position:relative;overflow:hidden;text-align:left;
+}
+.ccard::before{content:'';position:absolute;top:-50px;left:-50px;width:160px;height:160px;background:radial-gradient(circle,rgba(0,212,255,.07),transparent 70%);pointer-events:none;}
+.ccard::after{content:'';position:absolute;bottom:-40px;right:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(245,200,0,.05),transparent 70%);pointer-events:none;}
+
+.ctop{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.cbadge-tag{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.18);
+  border-radius:100px;padding:4px 11px;
+  font-family:'Space Mono',monospace;font-size:clamp(7px,1.8vw,8px);letter-spacing:.12em;color:var(--neon);
+}
+.btdot{width:5px;height:5px;background:var(--neon);border-radius:50%;animation:lp 1.4s ease infinite;}
+.mini-logos{display:flex;align-items:center;gap:6px;}
+.ml{
+  display:flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:100px;
+  font-family:'Syne',sans-serif;font-size:clamp(8px,2vw,10px);font-weight:700;
+}
+.ml.ov{background:rgba(200,164,68,.1);border:1px solid rgba(200,164,68,.22);color:var(--ovo2);}
+.ml.cc{background:rgba(245,200,0,.08);border:1px solid rgba(245,200,0,.2);color:var(--crown2);}
+.mlx{color:rgba(255,255,255,.15);font-size:9px;}
+
+.ccard h3{font-family:'Syne',sans-serif;font-size:clamp(18px,4.5vw,22px);font-weight:800;letter-spacing:-.02em;color:var(--white);margin-bottom:7px;}
+.cdesc{font-size:clamp(12px,3vw,14px);color:var(--muted);line-height:1.65;margin-bottom:16px;}
+.cdesc strong{color:var(--ice2);}
+
+.chips{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+.chip{
+  display:flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:9px;padding:9px 12px;
+  font-size:clamp(12px,3vw,13px);font-weight:500;color:rgba(255,255,255,.72);
+}
+.chip-i{font-size:14px;width:24px;text-align:center;flex-shrink:0;}
+
+.fields{display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
+.fw{position:relative;}
+.fi{
+  width:100%;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  color:var(--white);font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(14px,3.5vw,15px);
+  padding:13px 14px 13px 42px;
+  border-radius:11px;outline:none;
+  transition:all .18s ease;
+  -webkit-appearance:none;appearance:none;
+}
+.fi::placeholder{color:rgba(255,255,255,.2);}
+.fi:focus{border-color:rgba(0,212,255,.36);background:rgba(0,212,255,.04);box-shadow:0 0 0 3px rgba(0,212,255,.07);}
+.ficon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;opacity:.38;}
+
+.btn-sub{
+  width:100%;
+  background:linear-gradient(135deg,var(--neon) 0%,var(--ice) 100%);
+  color:var(--void);font-family:'Syne',sans-serif;
+  font-size:clamp(13px,3.5vw,15px);font-weight:800;letter-spacing:.02em;
+  padding:15px 24px;border-radius:100px;border:none;cursor:pointer;
+  box-shadow:0 0 26px rgba(0,212,255,.2),0 4px 18px rgba(0,0,0,.4);
+  transition:all .22s ease;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  position:relative;overflow:hidden;
+  min-height:52px;
+}
+.btn-sub::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 55%);border-radius:100px;}
+.btn-sub:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(0,212,255,.34),0 8px 28px rgba(0,0,0,.5);}
+.btn-sub:active{transform:scale(.97);}
+
+.cfine{font-size:clamp(9px,2vw,10px);color:rgba(255,255,255,.18);margin-top:10px;line-height:1.6;font-family:'Space Mono',monospace;}
+
+.shr{display:flex;gap:7px;justify-content:center;margin-top:16px;flex-wrap:wrap;animation:up .5s .3s ease both;}
+.sbtn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--glass);border:1px solid var(--gb);
+  color:var(--muted);border-radius:100px;
+  font-family:'Space Mono',monospace;font-size:clamp(8px,2vw,9px);letter-spacing:.1em;
+  padding:9px 14px;cursor:pointer;transition:all .18s;text-transform:uppercase;
+  min-height:38px;
+}
+.sbtn:hover{background:rgba(255,255,255,.07);border-color:rgba(125,211,240,.22);color:var(--ice);}
+
+/* ═══════════════════════
+   SUCCESS
+═══════════════════════ */
+#s-success{
+  justify-content:center;align-items:center;
+  padding:calc(60px + var(--sat)) 16px calc(40px + var(--sab));
+  text-align:center;
+}
+.suc-shell{width:100%;max-width:440px;margin:0 auto;}
+.suc-glow{
+  width:100px;height:100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.16),transparent 70%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:44px;margin:0 auto 20px;
+  animation:pop .55s cubic-bezier(.34,1.56,.64,1) both;
+  box-shadow:0 0 44px rgba(0,212,255,.12);
+}
+@keyframes pop{from{opacity:0;transform:scale(.1)}to{opacity:1;transform:scale(1)}}
+.suc-h{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(34px,8vw,56px);letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--white),var(--ice2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:up .5s .18s ease both;
+}
+.suc-p{font-size:clamp(13px,3vw,15px);color:var(--muted);max-width:320px;margin:12px auto 0;line-height:1.72;animation:up .5s .26s ease both;}
+.suc-p strong{color:var(--crown2);}
+.suc-p em{color:var(--ice2);font-style:normal;}
+
+.nbox{
+  margin-top:22px;
+  background:var(--glass);border:1px solid var(--gb);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:18px;padding:20px;
+  animation:up .5s .34s ease both;text-align:left;
+}
+.nlbl{font-family:'Space Mono',monospace;font-size:clamp(7px,1.8vw,8px);letter-spacing:.18em;color:var(--crown);text-transform:uppercase;margin-bottom:9px;}
+.nbox h4{font-family:'Syne',sans-serif;font-size:clamp(15px,3.8vw,17px);font-weight:800;letter-spacing:-.02em;color:var(--white);margin-bottom:5px;}
+.nbox p{font-size:clamp(11px,2.8vw,13px);color:var(--muted);line-height:1.62;margin-bottom:14px;}
+.btn-cc{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;
+  background:linear-gradient(135deg,var(--crown),var(--crown2));
+  color:var(--void);font-family:'Syne',sans-serif;
+  font-size:clamp(12px,3.2vw,14px);font-weight:800;letter-spacing:.02em;
+  padding:14px 20px;border-radius:100px;border:none;cursor:pointer;text-decoration:none;
+  box-shadow:0 0 26px rgba(245,200,0,.18);transition:all .22s ease;min-height:50px;
+}
+.btn-cc:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(245,200,0,.3);}
+.btn-cc:active{transform:scale(.97);}
+
+/* UTILS */
+@keyframes up{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* era colours for SVG text */
+.ice-grad  stop:first-child{stop-color:#ffffff}
+.ice-grad  stop:last-child{stop-color:var(--neon)}
+.gold-grad stop:first-child{stop-color:var(--ovo)}
+.gold-grad stop:last-child{stop-color:var(--crown2)}
+.fire-grad stop:first-child{stop-color:#ff6b35}
+.fire-grad stop:last-child{stop-color:#ffd166}
+.nght-grad stop:first-child{stop-color:#b48df0}
+.nght-grad stop:last-child{stop-color:#c77dff}
+</style>
+</head>
+<body>
+<div class="bg bg-base"></div>
+<div class="bg bg-grid"></div>
+<div class="bg bg-noise"></div>
+<div class="particles" id="pts"></div>
+
+<!-- ══ COLLAB BAR ══ -->
+<div class="cbar">
+  <div class="cbar-left">
+    <!-- OVO SVG owl -->
+    <div class="ovo-pill">
+      <svg viewBox="0 0 36 36" fill="none">
+        <ellipse cx="18" cy="13" rx="7" ry="6.5" fill="#c8a444" opacity=".65"/>
+        <polygon points="12,8.5 10,3.5 15,7.5" fill="#c8a444"/>
+        <polygon points="24,8.5 26,3.5 21,7.5" fill="#c8a444"/>
+        <circle cx="15" cy="13" r="3.2" fill="#f0d278"/>
+        <circle cx="21" cy="13" r="3.2" fill="#f0d278"/>
+        <circle cx="15" cy="13" r="1.8" fill="#020408"/>
+        <circle cx="21" cy="13" r="1.8" fill="#020408"/>
+        <circle cx="15.6" cy="12.4" r=".65" fill="white"/>
+        <circle cx="21.6" cy="12.4" r=".65" fill="white"/>
+        <polygon points="18,14.8 16.8,16.6 19.2,16.6" fill="#c8a444"/>
+        <ellipse cx="10.5" cy="22" rx="4.5" ry="6.5" fill="#c8a444" opacity=".45" transform="rotate(-14 10.5 22)"/>
+        <ellipse cx="25.5" cy="22" rx="4.5" ry="6.5" fill="#c8a444" opacity=".45" transform="rotate(14 25.5 22)"/>
+        <ellipse cx="18" cy="22" rx="8" ry="7.5" fill="#c8a444" opacity=".35"/>
+      </svg>
+      <span>OVO SOUND</span>
+    </div>
+    <span class="bar-sep">✕</span>
+    <!-- Crown Coins Casino SVG crown -->
+    <div class="cc-pill">
+      <svg viewBox="0 0 36 36" fill="none">
+        <path d="M6 26L8.5 15L14 20.5L18 11L22 20.5L27.5 15L30 26Z" fill="#f5c800" opacity=".9"/>
+        <rect x="6" y="26" width="24" height="3" rx="1.5" fill="#f5c800"/>
+        <circle cx="18" cy="11" r="2.2" fill="#ffe44d"/>
+        <circle cx="8.5" cy="15" r="1.7" fill="#ffe44d" opacity=".7"/>
+        <circle cx="27.5" cy="15" r="1.7" fill="#ffe44d" opacity=".7"/>
+      </svg>
+      <span>CROWN COINS CASINO</span>
+    </div>
+  </div>
+  <div class="cbar-right"><span class="ldot"></span>Official · ICEMAN 2026</div>
+</div>
+
+<!-- ══════════════════════════════
+     LANDING
+══════════════════════════════ -->
+<div class="screen active" id="s-land">
+  <div class="land-inner">
+
+    <div class="eyebrow">❄ Official Drake × OVO × Crown Coins Casino Collab</div>
+
+    <!-- ICEMAN as inline SVG — scales to 100% width, ZERO clipping ever -->
+    <div class="hero-svg-wrap">
+      <svg class="hero-svg" viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="htg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="22%"  stop-color="#b8e8fa"/>
+            <stop offset="44%"  stop-color="#00d4ff"/>
+            <stop offset="68%"  stop-color="#f0d278"/>
+            <stop offset="88%"  stop-color="#ffe44d"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <text
+          x="50%" y="115"
+          text-anchor="middle"
+          font-family="Syne, sans-serif"
+          font-weight="800"
+          font-size="128"
+          letter-spacing="-2"
+          fill="url(#htg)"
+          filter="url(#glow)">ICEMAN</text>
+      </svg>
+    </div>
+
+    <div class="hero-sub">Which Era Are You?</div>
+
+    <!-- Collab badges -->
+    <div class="collab-row">
+      <div class="cbadge ob"><span class="cbadge-ico">🦉</span><span class="cbadge-txt">OVO Sound</span></div>
+      <span class="crow">✕</span>
+      <div class="cbadge cb"><span class="cbadge-ico">👑</span><span class="cbadge-txt">Crown Coins Casino</span></div>
+      <span class="crow">✕</span>
+      <div class="cbadge db"><span class="cbadge-ico">❄️</span><span class="cbadge-txt">Drake</span></div>
+    </div>
+
+    <!-- Prizes -->
+    <div class="prize-wrap">
+      <div class="plabel">🎟 Prizes up for grabs</div>
+      <div class="pcards">
+        <div class="pcard">
+          <div class="pcard-ico">🎫</div>
+          <div><div class="pcard-title">Free Drake ICEMAN Tour Ticket</div><div class="pcard-sub">Official OVO collab prize · 1 winner per entry pool</div></div>
+        </div>
+        <div class="pcard">
+          <div class="pcard-ico">🤝</div>
+          <div><div class="pcard-title">Exclusive Meet & Greet with Drake</div><div class="pcard-sub">Backstage access · Contact us after quiz to claim</div></div>
+        </div>
+        <div class="pcard">
+          <div class="pcard-ico">👑</div>
+          <div><div class="pcard-title">OVO × Crown Coins Casino Merch Pack</div><div class="pcard-sub">Exclusive collab drop · All entrants eligible</div></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-start" onclick="startQuiz()">
+      Take The Quiz — It's Free <span class="arrow">→</span>
+    </button>
+
+    <div class="stats-row">
+      <div class="stt"><div class="stt-n">47K+</div><div class="stt-l">Fans Entered</div></div>
+      <div class="stt-d"></div>
+      <div class="stt"><div class="stt-n">3</div><div class="stt-l">Questions Only</div></div>
+      <div class="stt-d"></div>
+      <div class="stt"><div class="stt-n">May 15</div><div class="stt-l">ICEMAN Drops</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     QUIZ
+══════════════════════════════ -->
+<div class="screen" id="s-quiz">
+  <div class="quiz-shell">
+    <div class="prog-row">
+      <div class="prog-lbl" id="plbl">QUESTION 1 OF 3</div>
+      <div class="prog-dots" id="pdots"></div>
+    </div>
+    <div id="qmount"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     RESULT
+══════════════════════════════ -->
+<div class="screen" id="s-result">
+  <div class="res-shell">
+    <div class="reye">Your ICEMAN Era Is</div>
+
+    <!-- Era name as SVG — scales perfectly, never clips -->
+    <div class="era-svg-wrap">
+      <svg class="era-svg" id="era-svg" viewBox="0 0 700 110" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ice-g" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="50%" stop-color="#b8e8fa"/>
+            <stop offset="100%" stop-color="#00d4ff"/>
+          </linearGradient>
+          <linearGradient id="gold-g" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#c8a444"/>
+            <stop offset="50%" stop-color="#f0d278"/>
+            <stop offset="100%" stop-color="#ffe44d"/>
+          </linearGradient>
+          <linearGradient id="fire-g" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff6b35"/>
+            <stop offset="50%" stop-color="#ff9f1c"/>
+            <stop offset="100%" stop-color="#ffd166"/>
+          </linearGradient>
+          <linearGradient id="nght-g" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#b48df0"/>
+            <stop offset="50%" stop-color="#9d4edd"/>
+            <stop offset="100%" stop-color="#c77dff"/>
+          </linearGradient>
+          <filter id="eglow">
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <text id="era-txt"
+          x="50%" y="95"
+          text-anchor="middle"
+          font-family="Syne, sans-serif"
+          font-weight="800"
+          font-size="90"
+          letter-spacing="-2"
+          fill="url(#ice-g)"
+          filter="url(#eglow)">ERA</text>
+      </svg>
+    </div>
+
+    <div class="rsub" id="rsub"></div>
+    <p class="rdesc" id="rdesc"></p>
+
+    <!-- Contact card -->
+    <div class="ccard">
+      <div class="ctop">
+        <div class="cbadge-tag"><span class="btdot"></span>Contact Us To Claim</div>
+        <div class="mini-logos">
+          <div class="ml ov">🦉 OVO</div>
+          <span class="mlx">✕</span>
+          <div class="ml cc">👑 Crown Coins Casino</div>
+        </div>
+      </div>
+      <h3>You're One Step Away 🎟️</h3>
+      <p class="cdesc">Leave your details and our team will reach out within <strong>24 hours</strong> with full instructions to claim your prize.</p>
+      <div class="chips">
+        <div class="chip"><span class="chip-i">🎫</span>Free Drake ICEMAN Tour Ticket</div>
+        <div class="chip"><span class="chip-i">🤝</span>Exclusive Meet & Greet with Drake</div>
+        <div class="chip"><span class="chip-i">👑</span>OVO × Crown Coins Casino Merch Pack</div>
+      </div>
+      <div class="fields">
+        <div class="fw"><span class="ficon">👤</span><input class="fi" id="fn" type="text" placeholder="Your full name"/></div>
+        <div class="fw"><span class="ficon">✉️</span><input class="fi" id="fe" type="email" placeholder="Your email address"/></div>
+        <div class="fw"><span class="ficon">📱</span><input class="fi" id="fp" type="tel" placeholder="Your phone number"/></div>
+      </div>
+      <button class="btn-sub" onclick="submit()">
+        <span>Send My Details</span><span>→</span>
+      </button>
+      <p class="cfine">We never share your details. Team contacts you within 24hrs. 18+ only. No purchase necessary. Full T&Cs apply.</p>
+    </div>
+
+    <div class="shr">
+      <button class="sbtn" onclick="shr('x')">𝕏 Share</button>
+      <button class="sbtn" onclick="shr('fb')">Facebook</button>
+      <button class="sbtn" onclick="shr('wa')">💬 WhatsApp</button>
+      <button class="sbtn" onclick="shr('cp')">⎘ Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SUCCESS
+══════════════════════════════ -->
+<div class="screen" id="s-success">
+  <div class="suc-shell">
+    <div class="suc-glow">📩</div>
+    <div class="suc-h">We Got You.</div>
+    <p class="suc-p">Hey <strong id="sfn"></strong>, your details are in. Our team will contact you within <em>24 hours</em> with everything to claim your prize.</p>
+    <div class="nbox">
+      <div class="nlbl">⚡ Complete Your Entry</div>
+      <h4>Sign Up at Crown Coins Casino</h4>
+      <p>Required to fully qualify for the Drake ICEMAN ticket and Meet & Greet prize.</p>
+      <a class="btn-cc" href="https://www.crowncoinscasino.com" target="_blank" rel="noopener">
+        🎰 Sign Up at CrownCoinsCasino.com
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* PARTICLES */
+const pb=document.getElementById('pts');
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');p.className='pt';
+  const s=Math.random()*2.5+1;
+  const c=['rgba(0,212,255,.5)','rgba(125,211,240,.35)','rgba(200,164,68,.25)','rgba(255,255,255,.22)'];
+  p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;background:${c[~~(Math.random()*c.length)]};animation-duration:${Math.random()*15+9}s;animation-delay:${Math.random()*11}s;--dx:${(Math.random()-.5)*70}px;`;
+  pb.appendChild(p);
+}
+
+const Qs=[
+  {q:"It's midnight. ICEMAN just dropped. Where are you?",opts:[
+    {t:"Headphones in, lights off. Full immersive listen.",k:"ice"},
+    {t:"After-party. City's yours, energy is insane.",k:"fire"},
+    {t:"Group chat going crazy — you're hosting it all.",k:"night"},
+    {t:"You already had early access. Obviously.",k:"gold"},
+  ]},
+  {q:"Drake buries the drop date inside a Toronto ice block. You:",opts:[
+    {t:"Already knew. Always 10 steps ahead.",k:"ice"},
+    {t:"Showed up with a sledgehammer. Got the viral clip.",k:"fire"},
+    {t:"Watched every livestream, fully in your feelings.",k:"night"},
+    {t:"Sent the team. You don't chip ice yourself.",k:"gold"},
+  ]},
+  {q:"Which Drake lyric is your current life motto?",opts:[
+    {t:'"What did I miss?" — cold, calculated, ahead.',k:"ice"},
+    {t:'"0 to 100 real quick." — pure energy.',k:"fire"},
+    {t:'"Hotline Bling" — you feel everything.',k:"night"},
+    {t:'"Used to pray for times like this." — legacy.',k:"gold"},
+  ]}
+];
+
+const Eras={
+  ice: {label:"THE ICEMAN", grad:"url(#ice-g)",  sub:"THE SILENT WAVE ERA",  desc:"You move in silence and let results do the talking. Calculated, mysterious, always a decade ahead. <em>This era was built for you.</em>"},
+  gold:{label:"THE 6 GOD",  grad:"url(#gold-g)", sub:"THE EMPIRE ERA",       desc:"OVO. Charts. Legacy. You don't enter rooms — you own them. Every move intentional, every bag secured. <em>Drake's empire is your warm-up.</em>"},
+  fire:{label:"DRAKO",      grad:"url(#fire-g)", sub:"THE ENERGY ERA",       desc:"Zero to a hundred with no warm-up. You bring the voltage wherever you go and the city always feels it. <em>You set the tone. Every single time.</em>"},
+  night:{label:"CERTIFIED", grad:"url(#nght-g)", sub:"THE FEELINGS ERA",     desc:"You feel everything deeply and own it completely. Every emotion becomes art, every heartbreak a banger. <em>The most honest Drake is the most powerful — and that's you.</em>"},
+};
+
+let qi=0,sc={ice:0,gold:0,fire:0,night:0},era=null;
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildDots(){
+  const w=document.getElementById('pdots');w.innerHTML='';
+  Qs.forEach((_,i)=>{const d=document.createElement('div');d.className='pd '+(i===0?'active':'idle');d.id=`pd${i}`;w.appendChild(d);});
+}
+function updDots(){
+  Qs.forEach((_,i)=>{const d=document.getElementById(`pd${i}`);if(d)d.className='pd '+(i<qi?'done':i===qi?'active':'idle');});
+}
+
+function startQuiz(){qi=0;sc={ice:0,gold:0,fire:0,night:0};buildDots();show('s-quiz');renderQ();}
+
+function renderQ(){
+  document.getElementById('plbl').textContent=`QUESTION ${qi+1} OF ${Qs.length}`;
+  updDots();
+  const q=Qs[qi],L=['A','B','C','D'],m=document.getElementById('qmount');
+  m.innerHTML='';
+  const w=document.createElement('div');w.className='q-anim';
+  w.innerHTML=`<div class="qnum">Q${String(qi+1).padStart(2,'0')} · ICEMAN ERA QUIZ</div>
+    <div class="qtext">${q.q}</div>
+    <div class="opts">${q.opts.map((o,i)=>`
+      <button class="opt" onclick="pick('${o.k}')">
+        <div class="okey">${L[i]}</div>
+        <div class="otxt">${o.t}</div>
+      </button>`).join('')}
+    </div>`;
+  m.appendChild(w);
+}
+
+function pick(k){sc[k]++;qi++;qi<Qs.length?renderQ():showResult();}
+
+function showResult(){
+  const w=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0][0];
+  era=Eras[w];
+
+  /* update SVG era name */
+  const t=document.getElementById('era-txt');
+  t.textContent=era.label;
+  t.setAttribute('fill',era.grad);
+
+  /* adjust font size for long labels */
+  const fsize=era.label.length>8?68:era.label.length>6?78:90;
+  t.setAttribute('font-size',fsize);
+
+  document.getElementById('rsub').textContent=era.sub;
+  document.getElementById('rdesc').innerHTML=era.desc;
+  show('s-result');
+}
+
+function submit(){
+  const n=document.getElementById('fn').value.trim();
+  const e=document.getElementById('fe').value.trim();
+  const p=document.getElementById('fp').value.trim();
+  if(!n||!e){alert('Please enter your name and email.');return;}
+  if(!/\S+@\S+\.\S+/.test(e)){alert('Please enter a valid email address.');return;}
+  if(!p){alert('Please enter your phone number so our team can reach you.');return;}
+  const payload={name:n,email:e,phone:p,era:era?.label,source:'iceman-quiz-v8',ts:new Date().toISOString()};
+  console.log('Entry:',payload);
+  // fetch('https://formspree.io/f/YOUR_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  document.getElementById('sfn').textContent=n.split(' ')[0];
+  show('s-success');
+}
+
+function shr(p){
+  const txt=`I got "${era?.label}" on the official Drake ICEMAN × Crown Coins Casino quiz 🧊🎟️ Win FREE tickets + Meet & Greet!`;
+  const url=window.location.href;
+  if(p==='x')window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(txt)}&url=${encodeURIComponent(url)}`);
+  if(p==='fb')window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+  if(p==='wa')window.open(`https://wa.me/?text=${encodeURIComponent(txt+' '+url)}`);
+  if(p==='cp')navigator.clipboard.writeText(url).then(()=>alert('Link copied!'));
+}
+</script>
+</body>
+</html>
