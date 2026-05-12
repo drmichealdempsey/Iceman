@@ -881,7 +881,7 @@ function submit(){
   if(!p){alert('Please enter your phone number so our team can reach you.');return;}
   const payload={name:n,email:e,phone:p,era:era?.label,source:'iceman-quiz-v8',ts:new Date().toISOString()};
   console.log('Entry:',payload);
-  // fetch('https://formspree.io/f/YOUR_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  fetch('https://formspree.io/f/xnjwrnza',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
   document.getElementById('sfn').textContent=n.split(' ')[0];
   show('s-success');
 }
